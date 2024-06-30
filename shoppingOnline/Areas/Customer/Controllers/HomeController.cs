@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using shoppingOnline.Models;
+using ShoppingOnline.Models;
 using System.Diagnostics;
 
-namespace shoppingOnline.Controllers
+namespace shoppingOnline.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
+        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)

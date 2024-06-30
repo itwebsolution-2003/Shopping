@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using ShoppingOnline.DataAccess.Data;
+using ShoppingOnline.DataAccess.Repository;
+using ShoppingOnline.DataAccess.Repository.IRepository;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container.register sevices
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ApplicatinDbContext>(options => 
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();   //we added the categoryRepository Or Unitofwork services here
 
 var app = builder.Build();
 
@@ -22,6 +30,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
